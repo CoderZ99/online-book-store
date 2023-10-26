@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table bookstore.role: ~3 rows (approximately)
-INSERT IGNORE INTO `role` (`id`, `role_name`) VALUES
+REPLACE INTO `role` (`id`, `role_name`) VALUES
 	(1, 'admin'),
 	(2, 'moderator'),
 	(3, 'customer');
@@ -38,19 +38,19 @@ INSERT IGNORE INTO `role` (`id`, `role_name`) VALUES
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(1000) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `email` varchar(1000) NOT NULL,
   `password` varchar(1000) NOT NULL,
   `full_name` varchar(1000) NOT NULL,
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`) USING HASH,
+  UNIQUE KEY `username` (`username`),
   KEY `role_id` (`role_id`),
   CONSTRAINT `role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table bookstore.user: ~2 rows (approximately)
-INSERT IGNORE INTO `user` (`id`, `username`, `email`, `password`, `full_name`, `role_id`) VALUES
+REPLACE INTO `user` (`id`, `username`, `email`, `password`, `full_name`, `role_id`) VALUES
 	(2, 'phuc123', 'phuc123@gmial.com', '$2b$10$ZoBBat1VN5NViEX954FTDeFOQvNC.FfEFQbaefLEDFw.dbr/KRCAC', 'nguyen van phuc', 3),
 	(3, 'admin', 'admin@gmail.com', '$2b$10$JvWt1EVfjvADFlqcYpaW3.lyMV4UdE.IOFwGl0hewKHWV0JPxwxb.', 'nguyen van a', 1);
 
